@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import createTodoRequest from "../api/createTodoRequest";
-import { Input, Button, useMediaQuery } from "@mui/material";
+import { Input, Button, useMediaQuery, ListItem } from "@mui/material";
 
 export const NewTodoForm = (props) => {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
@@ -39,6 +39,8 @@ export const NewTodoForm = (props) => {
                 width: 380,
                 height: 51,
                 px: 5,
+                fontStyle: "italic",
+                fontWeight: "light",
               }}
               type="text"
               value={text}

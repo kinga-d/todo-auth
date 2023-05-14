@@ -13,10 +13,12 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import { useState, useEffect } from "react";
 import logo from "./logo.svg";
-import { useMediaQuery } from "@mui/material";
+import { List, useMediaQuery } from "@mui/material";
 
 function App() {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
+  const isMini = useMediaQuery("(min-width: 620px)");
+
   const [auth, setAuth] = useState(
     false || window.localStorage.getItem("auth") === "true"
   );
@@ -96,14 +98,18 @@ function App() {
           </div>
         )}
       </div>
-      <div className="text-center mt-[65px] italic text-[20px]">
-        login to save
-      </div>
+      {!auth ? (
+        <div className="text-center mt-[65px] italic text-[20px]">
+          login to save
+        </div>
+      ) : (
+        <div className="mt-[50px]  "></div>
+      )}
       <div>
         {auth ? (
           <div>
             <NewTodoForm userId={userId} token={token} />
-            <div className="mt-6">
+            <div className="flex flex-col justify-center items-center">
               {isLoading ? (
                 <ClipLoader size={150} />
               ) : (

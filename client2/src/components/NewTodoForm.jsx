@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import createTodoRequest from "../api/createTodoRequest";
+import { Input, Button, useMediaQuery } from "@mui/material";
 
 export const NewTodoForm = (props) => {
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+
   const [text, setText] = useState("");
 
   const queryClient = useQueryClient();
@@ -26,16 +29,33 @@ export const NewTodoForm = (props) => {
             setText("");
           }}
         >
-          <div className="flex justify-center items-center">
-            <input
-              className="w-[343px] h-[61px] text-[40px] bg-[#6E56FF]"
+          <div className="flex justify-center items-center mt-[20px]">
+            <Input
+              sx={{
+                bgcolor: "#6E56FF",
+                color: "#ffffff",
+                fontSize: 22,
+                textTransform: "none",
+                width: 380,
+                height: 51,
+                px: 5,
+              }}
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
-            <button className="w-[135px] h-[61px] text-[40px] bg-[#93FF56]">
+            <Button
+              sx={{
+                bgcolor: "#93FF56",
+                color: "#000000",
+                fontSize: 22,
+                width: 100,
+                textTransform: "none",
+                borderRadius: 0,
+              }}
+            >
               +task
-            </button>{" "}
+            </Button>
           </div>
         </form>
       </div>

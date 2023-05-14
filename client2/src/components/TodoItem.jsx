@@ -1,8 +1,11 @@
 import { useMutation, useQueryClient } from "react-query";
 import updateTodoRequest from "../api/updateTodoRequest";
 import deleteTodoRequest from "../api/deleteTodoRequest";
+import { Button, useMediaQuery } from "@mui/material";
 
 export const TodoItem = ({ todo, token }) => {
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
+
   const queryClient = useQueryClient();
 
   const { mutate: updateTodo } = useMutation(
@@ -49,12 +52,19 @@ export const TodoItem = ({ todo, token }) => {
           }}
         />
 
-        <button
-          className="w-[72px] h-[61px] text-[40px] bg-[#6E56FF]"
+        <Button
+          sx={{
+            bgcolor: "#6E56FF",
+            color: "#ffffff",
+            fontSize: 22,
+
+            textTransform: "none",
+            borderRadius: 0,
+          }}
           onClick={() => deleteTodo(todo)}
         >
           -
-        </button>
+        </Button>
       </div>
     </div>
   );

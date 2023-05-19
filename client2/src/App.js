@@ -24,6 +24,7 @@ function App() {
   );
   const [userId, setUserId] = useState("");
   const [token, setToken] = useState("");
+  const [userName, setUserName] = useState("");
 
   const { isLoading, data: todos } = useQuery("todos", () =>
     readTodosRequest(token)
@@ -39,6 +40,16 @@ function App() {
       });
   };
 
+  const logOut = () => {
+    setUserName("");
+    setUserId("");
+    setToken("");
+    setAuth(false);
+    localStorage.clear();
+
+    firebase.auth().signOut();
+  };
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userCred) => {
       if (userCred) {
@@ -47,6 +58,7 @@ function App() {
         setUserId(userCred.uid);
         userCred.getIdToken().then((token) => {
           setToken(token);
+          setUserName(userCred.displayName);
         });
       } else {
         // User not logged in or has just logged out.
@@ -61,6 +73,7 @@ function App() {
           <div className="text-[70px]">
             <img width="120" src={logo} alt="logo" />
           </div>
+
           {isNonMobile ? (
             <div className="text-[70px] font-nunito">uTodo</div>
           ) : (
@@ -69,35 +82,43 @@ function App() {
           <div className="">
             <button
               className="h-[77px] w-[145px] border border-black text-[32px]"
-              onClick={loginWithGoogle}
+              onClick={!auth ? loginWithGoogle : logOut}
             >
-              Log in
+              {!auth ? "Log in" : "Log out"}
             </button>
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center mt-[86px]">
-        {isNonMobile ? (
-          <div className="text-[36px]  border bg-white border-black w-[485px] h-[86px] blur-[1.5px] ">
-            <p className="text-center leading-[80px]">minimaze distractions</p>
-          </div>
-        ) : (
-          <div className="text-center  text-3xl  blur-[1.5px]">
-            <p>minimaze distractions</p>
-          </div>
-        )}
-        {isNonMobile ? (
-          <div className="text-[48px]  border border-black w-[658px] h-[136px] mt-[-30px]">
-            <p className="text-center leading-[130px]">
-              focus on what's important
-            </p>
-          </div>
-        ) : (
-          <div className="text-5xl  mt-[10px] text-center ">
-            <p>focus on what's important</p>
-          </div>
-        )}
-      </div>
+      {!auth ? (
+        <div className="flex flex-col justify-center items-center mt-[86px]">
+          {isNonMobile ? (
+            <div className="text-[36px]  border bg-white border-black w-[485px] h-[86px] blur-[1.5px] ">
+              <p className="text-center leading-[80px]">
+                minimaze distractions
+              </p>
+            </div>
+          ) : (
+            <div className="text-center  text-3xl  blur-[1.5px]">
+              <p>minimaze distractions</p>
+            </div>
+          )}
+          {isNonMobile ? (
+            <div className="text-[48px]  border border-black w-[658px] h-[136px] mt-[-30px]">
+              <p className="text-center leading-[130px]">
+                focus on what's important
+              </p>
+            </div>
+          ) : (
+            <div className="text-5xl  mt-[10px] text-center ">
+              <p>focus on what's important</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="text-5xl  mt-[60px] mb-[80px] text-center ">
+          Hello, {userName} 👋
+        </div>
+      )}
       {!auth ? (
         <div className="text-center mt-[65px] italic text-[20px]">
           login to save

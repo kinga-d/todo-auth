@@ -21,3 +21,4 @@
   * Express
   * MongoDB
   * React Query
+  * Tailwind

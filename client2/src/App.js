@@ -14,6 +14,7 @@ import "firebase/compat/firestore";
 import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import { List, useMediaQuery } from "@mui/material";
+import { DummyTodoList } from "./components/DummyTodoList";
 
 function App() {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
@@ -141,7 +142,9 @@ function App() {
             </div>
           </div>
         ) : (
-          <div>nothing to show</div>
+          <div>
+            <DummyTodoList />
+          </div>
         )}
       </div>
     </div>

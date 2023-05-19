@@ -18,48 +18,46 @@ export const NewTodoForm = (props) => {
   return (
     <div>
       <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (!text) return;
-            createTodo({
-              text: text,
-              userId: props.userId,
-            });
-            setText("");
-          }}
-        >
-          <div className="flex justify-center items-center mt-[20px]">
-            <Input
-              sx={{
-                bgcolor: "#6E56FF",
-                color: "#ffffff",
-                fontSize: 22,
-                textTransform: "none",
-                width: 380,
-                height: 51,
-                px: 5,
-                fontStyle: "italic",
-                fontWeight: "light",
-              }}
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-            <Button
-              sx={{
-                bgcolor: "#93FF56",
-                color: "#000000",
-                fontSize: 22,
-                width: 100,
-                textTransform: "none",
-                borderRadius: 0,
-              }}
-            >
-              +task
-            </Button>
-          </div>
-        </form>
+        <div className="flex justify-center items-center mt-[20px]">
+          <Input
+            sx={{
+              bgcolor: "#6E56FF",
+              color: "#ffffff",
+              fontSize: 22,
+              textTransform: "none",
+              width: 380,
+              height: 51,
+              px: 5,
+              fontStyle: "italic",
+              fontWeight: "light",
+            }}
+            type="text"
+            value={text}
+            placeholder="clean up your thoughts"
+            onChange={(e) => setText(e.target.value)}
+          />
+          <Button
+            sx={{
+              bgcolor: "#93FF56",
+              color: "#000000",
+              fontSize: 22,
+              width: 100,
+              textTransform: "none",
+              borderRadius: 0,
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              if (!text) return;
+              createTodo({
+                text: text,
+                userId: props.userId,
+              });
+              setText("");
+            }}
+          >
+            +task
+          </Button>
+        </div>
       </div>
     </div>
   );

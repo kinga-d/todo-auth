@@ -6,9 +6,9 @@
 
 
 ## Desktop view
-![logged out](readme/utodosmall.JPG) 
+![logged out](readme/utodosmall.jpg) 
    
-![log in](readme/utodologgedsmall.JPG) 
+![log in](readme/utodologgedsmall.jpg) 
 
 
 ## Mobile view

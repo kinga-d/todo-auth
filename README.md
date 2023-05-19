@@ -14,3 +14,10 @@
 ## Mobile view
 
    ![mobile view](readme/utodomobilelogged2.jpg) 
+
+# Built with
+  * ReactJS
+  * NodeJS
+  * Express
+  * MongoDB
+  * React Query
